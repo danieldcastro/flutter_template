@@ -1,0 +1,8 @@
+name: app_template
+description: Template Flutter com FVM + flavors
+version: 0.1.0
+
+vars:
+  project_name:
+    type: string
+    description: Nome do projeto

@@ -1,0 +1,29 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "[QA] - {{app_name}}",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "qa",
+                "--dart-define=env=qa",
+                "--dart-define-from-file=env/env_qa.json"
+            ]
+        },
+        {
+            "name": "[PROD] - {{app_name}}",
+            "request": "launch",
+            "type": "dart",
+            "program": "lib/main.dart",
+            "args": [
+                "--flavor",
+                "prod",
+                "--dart-define=env=prod",
+                "--dart-define-from-file=env/env_prod.json"
+            ]
+        }
+    ]
+}
