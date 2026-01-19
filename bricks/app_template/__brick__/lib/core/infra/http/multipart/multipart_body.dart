@@ -13,10 +13,7 @@ class MultipartFileData {
 }
 
 class MultipartBody {
-  MultipartBody({
-    this.fields = const {},
-    this.files = const [],
-  });
+  MultipartBody({this.fields = const {}, this.files = const []});
 
   final Map<String, String> fields;
   final List<MultipartFileData> files;

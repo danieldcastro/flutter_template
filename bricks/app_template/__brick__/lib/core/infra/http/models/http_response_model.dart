@@ -27,13 +27,11 @@ class HttpResponseModel<T> {
     Map<String, String>? headers,
     String? message,
     Object? raw,
-  }) {
-    return HttpResponseModel<T>(
+  }) => HttpResponseModel<T>(
       statusCode: statusCode ?? this.statusCode,
       data: data ?? this.data,
       headers: headers ?? this.headers,
       message: message ?? this.message,
       raw: raw ?? this.raw,
     );
-  }
 }

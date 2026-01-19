@@ -15,10 +15,7 @@ abstract class INav {
     Object? arguments,
   });
 
-  void navigate(
-    String routeName, {
-    Object? arguments,
-  });
+  void navigate(String routeName, {Object? arguments});
 
   void pop<T extends Object?>([T? result]);
 

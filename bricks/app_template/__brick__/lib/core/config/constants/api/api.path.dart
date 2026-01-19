@@ -1,15 +1,10 @@
+import 'external_uris.dart';
+
 class ApiPath {
   ApiPath._();
 
-  static String join(
-    String base, [
-    List<String> segments = const [],
-  ]) {
-    final clean = <String>[
-      ...base.split('/').where((e) => e.isNotEmpty),
-      ...segments.map((e) => e.trim()).where((e) => e.isNotEmpty),
-    ];
+  static Uri _joinUri(Uri base, Iterable<String> segments) =>
+      base.replace(pathSegments: [...base.pathSegments, ...segments]);
 
-    return '/${clean.join('/')}';
-  }
+  static final Uri posts = _joinUri(ExternalUris.jsonPlaceHolder, ['posts']);
 }

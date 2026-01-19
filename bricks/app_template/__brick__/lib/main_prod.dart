@@ -1,6 +1,6 @@
-import 'core/config/flavors/flavor_enum.dart';
+import 'core/config/flavors/flavor.dart';
 import 'main_common.dart';
 
 void main() {
-  bootstrap(flavor: FlavorEnum.prod);
+  bootstrap(flavor: Flavor.prod);
 }

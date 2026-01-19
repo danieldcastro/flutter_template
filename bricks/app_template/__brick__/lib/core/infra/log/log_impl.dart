@@ -29,11 +29,7 @@ class LogImpl implements ILog {
   }
 
   @override
-  void debug(
-    String message, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) {
+  void debug(String message, [Object? error, StackTrace? stackTrace]) {
     _logger.d(
       message,
       time: DateTime.now(),
@@ -43,11 +39,7 @@ class LogImpl implements ILog {
   }
 
   @override
-  void info(
-    String message, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) {
+  void info(String message, [Object? error, StackTrace? stackTrace]) {
     _logger.i(
       message,
       time: DateTime.now(),
@@ -57,11 +49,7 @@ class LogImpl implements ILog {
   }
 
   @override
-  void warning(
-    String message, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) {
+  void warning(String message, [Object? error, StackTrace? stackTrace]) {
     _logger.w(
       message,
       time: DateTime.now(),
@@ -71,11 +59,7 @@ class LogImpl implements ILog {
   }
 
   @override
-  void error(
-    String message, [
-    Object? error,
-    StackTrace? stackTrace,
-  ]) {
+  void error(String message, [Object? error, StackTrace? stackTrace]) {
     _logger.e(
       message,
       time: DateTime.now(),

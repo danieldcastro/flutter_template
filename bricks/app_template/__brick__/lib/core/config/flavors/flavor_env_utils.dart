@@ -1,13 +1,13 @@
-import 'flavor_enum.dart';
+import 'flavor.dart';
 
 class FlavorEnvUtils {
   FlavorEnvUtils._();
 
-  static String baseUrl(FlavorEnum flavor) {
+  static String baseUrl(Flavor flavor) {
     switch (flavor) {
-      case FlavorEnum.qa:
+      case Flavor.qa:
         return const String.fromEnvironment('API_URL_QA');
-      case FlavorEnum.prod:
+      case Flavor.prod:
         return const String.fromEnvironment('API_URL_PROD');
     }
   }

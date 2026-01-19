@@ -28,8 +28,7 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
     Color? border,
     Color? shadow,
     Gradient? primaryGradient,
-  }) {
-    return AppCustomColors(
+  }) => AppCustomColors(
       success: success ?? this.success,
       successLight: successLight ?? this.successLight,
       warning: warning ?? this.warning,
@@ -37,7 +36,6 @@ class AppCustomColors extends ThemeExtension<AppCustomColors> {
       shadow: shadow ?? this.shadow,
       primaryGradient: primaryGradient ?? this.primaryGradient,
     );
-  }
 
   @override
   AppCustomColors lerp(ThemeExtension<AppCustomColors>? other, double t) {

@@ -7,39 +7,30 @@ class NavImpl implements INav {
   Future<T?> pushNamed<T extends Object?>(
     String routeName, {
     Object? arguments,
-  }) {
-    return Modular.to.pushNamed<T>(routeName, arguments: arguments);
-  }
+  }) => Modular.to.pushNamed<T>(routeName, arguments: arguments);
 
   @override
   Future<T?> pushReplacementNamed<T extends Object?, R extends Object?>(
     String routeName, {
     R? result,
     Object? arguments,
-  }) {
-    return Modular.to.pushReplacementNamed<T, R>(
+  }) => Modular.to.pushReplacementNamed<T, R>(
       routeName,
       arguments: arguments,
     );
-  }
 
   @override
   Future<T?> pushNamedAndClearStack<T extends Object?>(
     String routeName, {
     Object? arguments,
-  }) {
-    return Modular.to.pushNamedAndRemoveUntil<T>(
+  }) => Modular.to.pushNamedAndRemoveUntil<T>(
       routeName,
       (route) => false,
       arguments: arguments,
     );
-  }
 
   @override
-  void navigate(
-    String routeName, {
-    Object? arguments,
-  }) {
+  void navigate(String routeName, {Object? arguments}) {
     Modular.to.navigate(routeName, arguments: arguments);
   }
 
@@ -58,10 +49,5 @@ class NavImpl implements INav {
     String routeName, {
     R? result,
     Object? arguments,
-  }) {
-    return Modular.to.popAndPushNamed<T?, R>(
-      routeName,
-      arguments: arguments,
-    );
-  }
+  }) => Modular.to.popAndPushNamed<T?, R>(routeName, arguments: arguments);
 }

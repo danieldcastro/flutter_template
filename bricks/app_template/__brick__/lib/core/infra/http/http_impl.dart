@@ -5,9 +5,9 @@ import 'models/http_response_model.dart';
 import 'multipart/multipart_body.dart';
 
 class HttpImpl implements IHttp {
-  HttpImpl(this._dio);
-
   final Dio _dio;
+
+  HttpImpl(this._dio);
 
   @override
   Future<HttpResponseModel<T>> get<T>(
@@ -38,7 +38,7 @@ class HttpImpl implements IHttp {
   }) async {
     try {
       final r = await _dio.post(
-        uri.path,
+        uri.toString(),
         data: _adaptBody(body),
         queryParameters: query,
         options: Options(headers: headers),
@@ -59,7 +59,7 @@ class HttpImpl implements IHttp {
   }) async {
     try {
       final r = await _dio.put(
-        uri.path,
+        uri.toString(),
         data: _adaptBody(body),
         queryParameters: query,
         options: Options(headers: headers),
@@ -80,7 +80,7 @@ class HttpImpl implements IHttp {
   }) async {
     try {
       final r = await _dio.patch(
-        uri.path,
+        uri.toString(),
         data: _adaptBody(body),
         queryParameters: query,
         options: Options(headers: headers),
@@ -101,7 +101,7 @@ class HttpImpl implements IHttp {
   }) async {
     try {
       final r = await _dio.delete(
-        uri.path,
+        uri.toString(),
         data: _adaptBody(body),
         queryParameters: query,
         options: Options(headers: headers),
@@ -123,12 +123,10 @@ class HttpImpl implements IHttp {
     );
   }
 
-  HttpResponseModel<T> _err<T>(DioException e) {
-    return HttpResponseModel<T>(
-      statusCode: e.response?.statusCode ?? 0,
-      raw: e.response?.data ?? e,
-    );
-  }
+  HttpResponseModel<T> _err<T>(DioException e) => HttpResponseModel<T>(
+    statusCode: e.response?.statusCode ?? 0,
+    raw: e.response?.data ?? e,
+  );
 
   Object? _adaptBody(Object? body) {
     if (body is MultipartBody) return _toFormData(body);
@@ -146,10 +144,7 @@ class HttpImpl implements IHttp {
       form.files.add(
         MapEntry(
           f.field,
-          MultipartFile.fromBytes(
-            f.bytes,
-            filename: f.filename,
-          ),
+          MultipartFile.fromBytes(f.bytes, filename: f.filename),
         ),
       );
     }

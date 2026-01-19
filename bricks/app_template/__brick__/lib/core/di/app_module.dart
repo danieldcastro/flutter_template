@@ -1,8 +1,8 @@
 import 'package:flutter_modular/flutter_modular.dart';
 
-import 'core/routes/routes.dart';
+import '../../modules/home/home_module.dart';
+import '../routing/routes.dart';
 import 'core_module.dart';
-import 'modules/home/home_module.dart';
 
 class AppModule extends Module {
   @override
@@ -10,7 +10,6 @@ class AppModule extends Module {
 
   @override
   void routes(RouteManager r) {
-    // Rotas iniciais do template
     r.module(Routes.initial, module: HomeModule());
 
     // Adicione novas rotas aqui

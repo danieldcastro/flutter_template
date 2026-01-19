@@ -1,16 +1,16 @@
-import 'flavor_enum.dart';
+import 'flavor.dart';
 import 'flavor_env_utils.dart';
 
 class Flavors {
   Flavors._();
 
-  static late final FlavorEnum _current;
+  static late final Flavor _current;
 
-  static void init(FlavorEnum flavor) {
+  static void init(Flavor flavor) {
     _current = flavor;
   }
 
-  static FlavorEnum get current => _current;
+  static Flavor get current => _current;
 
   static String get env => _current.name;
 
