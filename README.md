@@ -445,3 +445,20 @@ A ideia não é agradar todos os estilos, e sim fornecer uma base sólida para p
 
 ---
 
+## 📘 Guias e Documentação
+
+Este template segue uma arquitetura modular e opinativa.  
+Para manter consistência entre features, **toda nova feature deve seguir o mesmo padrão**.
+
+👉 **Leia antes de criar uma nova feature:**
+
+- 📗 [Guia de Criação de Features](./FEATURE_GUIDE.md)  
+  Passo a passo para criar uma feature do zero, incluindo:
+  - estrutura de pastas
+  - domain, data e ui
+  - usecases, repositories e bloc
+  - boas práticas e checklist final
+
+> 💡 Dica: se uma feature não seguir esse guia, provavelmente ela vai quebrar a previsibilidade do projeto.
+
+
