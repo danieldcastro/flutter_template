@@ -1,0 +1,103 @@
+# justfile
+# Instale o just: https://github.com/casey/just
+# Rodar: just --list
+
+set shell := ["bash", "-cu"]
+
+# --------
+# Mason
+# --------
+mason-get:
+  mason get
+
+gen:
+  mason make app_template
+
+init:
+  just mason-get
+  just gen
+
+# --------
+# Vars
+# --------
+FLUTTER := "fvm flutter"
+FLAVOR ?= "qa"
+ENV_FILE := "env/env_{{FLAVOR}}.json"
+
+# Mac-only check (simples)
+is_macos := `uname -s | grep -q Darwin && echo yes || echo no`
+
+# --------
+# Helpers
+# --------
+@_flutter_build target flavor env_file:
+  {{FLUTTER}} build {{target}} \
+    --release \
+    --flavor {{flavor}} \
+    --dart-define env={{flavor}} \
+    --dart-define-from-file={{env_file}}
+
+# --------
+# Basics
+# --------
+clean:
+  {{FLUTTER}} clean
+
+get:
+  {{FLUTTER}} pub get
+
+build *args="":
+  {{FLUTTER}} build {{args}}
+
+build-bundle:
+  {{FLUTTER}} build appbundle
+
+build-apk:
+  {{FLUTTER}} build apk
+
+build-ios:
+  {{FLUTTER}} build ios
+
+# --------
+# iOS pods repair (macOS)
+# --------
+pods-repair:
+  @if [ "{{is_macos}}" != "yes" ]; then \
+    echo "pods-repair: só funciona no macOS (CocoaPods)."; \
+    exit 1; \
+  fi
+  just clean
+  (cd ios && pod deintegrate)
+  (cd ios && rm -rf Podfile.lock)
+  just get
+  (cd ios && pod install)
+
+# --------
+# PROD
+# --------
+bundle-prod:
+  just _flutter_build "appbundle" "prod" "env/env_prod.json"
+
+apk-prod:
+  just _flutter_build "apk" "prod" "env/env_prod.json"
+
+ios-prod:
+  just _flutter_build "ios" "prod" "env/env_prod.json"
+
+ipa-prod:
+  just _flutter_build "ipa" "prod" "env/env_prod.json"
+
+# --------
+# QA
+# --------
+bundle-qa:
+  just _flutter_build "appbundle" "qa" "env/env_qa.json"
+
+apk-qa:
+  just _flutter_build "apk" "qa" "env/env_qa.json"
+
+ios-qa:
+  just _flutter_build "ios" "qa" "env/env_qa.json"
+
+ipa-qa:
+  just _flutter_build "ipa" "qa" "env/env_qa.json"

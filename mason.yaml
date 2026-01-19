@@ -1,3 +1,6 @@
 bricks:
   app_template:
-    path: "bricks\\app_template"
+    git:
+      url: https://github.com/danieldcastro/flutter_template.git
+      path: bricks/app_template
+      ref: v0.1.0
