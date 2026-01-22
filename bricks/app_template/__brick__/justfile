@@ -23,6 +23,7 @@ init:
 FLUTTER := "fvm flutter"
 FLAVOR ?= "qa"
 ENV_FILE := "env/env_{{FLAVOR}}.json"
+TARGET := "lib/main_{{FLAVOR}}.dart"
 
 # Mac-only check (simples)
 is_macos := `uname -s | grep -q Darwin && echo yes || echo no`
@@ -30,9 +31,10 @@ is_macos := `uname -s | grep -q Darwin && echo yes || echo no`
 # --------
 # Helpers
 # --------
-@_flutter_build target flavor env_file:
+@_flutter_build target flavor env_file target_file:
   {{FLUTTER}} build {{target}} \
     --release \
+    -t {{target_file}} \
     --flavor {{flavor}} \
     --dart-define env={{flavor}} \
     --dart-define-from-file={{env_file}}
@@ -76,28 +78,44 @@ pods-repair:
 # PROD
 # --------
 bundle-prod:
-  just _flutter_build "appbundle" "prod" "env/env_prod.json"
+  just _flutter_build "appbundle" "prod" "env/env_prod.json" "lib/main_prod.dart"
 
 apk-prod:
-  just _flutter_build "apk" "prod" "env/env_prod.json"
+  just _flutter_build "apk" "prod" "env/env_prod.json" "lib/main_prod.dart"
 
 ios-prod:
-  just _flutter_build "ios" "prod" "env/env_prod.json"
+  just _flutter_build "ios" "prod" "env/env_prod.json" "lib/main_prod.dart"
 
 ipa-prod:
-  just _flutter_build "ipa" "prod" "env/env_prod.json"
+  just _flutter_build "ipa" "prod" "env/env_prod.json" "lib/main_prod.dart"
 
 # --------
 # QA
 # --------
 bundle-qa:
-  just _flutter_build "appbundle" "qa" "env/env_qa.json"
+  just _flutter_build "appbundle" "qa" "env/env_qa.json" "lib/main_qa.dart"
 
 apk-qa:
-  just _flutter_build "apk" "qa" "env/env_qa.json"
+  just _flutter_build "apk" "qa" "env/env_qa.json" "lib/main_qa.dart"
 
 ios-qa:
-  just _flutter_build "ios" "qa" "env/env_qa.json"
+  just _flutter_build "ios" "qa" "env/env_qa.json" "lib/main_qa.dart"
 
 ipa-qa:
-  just _flutter_build "ipa" "qa" "env/env_qa.json"
+  just _flutter_build "ipa" "qa" "env/env_qa.json" "lib/main_qa.dart"
+
+# --------
+# (Opcional) comandos genéricos por FLAVOR
+# Ex: just apk (usa FLAVOR=qa por padrão) | just apk FLAVOR=prod
+# --------
+bundle:
+  just _flutter_build "appbundle" "{{FLAVOR}}" "{{ENV_FILE}}" "{{TARGET}}"
+
+apk:
+  just _flutter_build "apk" "{{FLAVOR}}" "{{ENV_FILE}}" "{{TARGET}}"
+
+ios:
+  just _flutter_build "ios" "{{FLAVOR}}" "{{ENV_FILE}}" "{{TARGET}}"
+
+ipa:
+  just _flutter_build "ipa" "{{FLAVOR}}" "{{ENV_FILE}}" "{{TARGET}}"
