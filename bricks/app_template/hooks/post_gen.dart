@@ -1,6 +1,7 @@
 import 'dart:io';
+import 'package:mason/mason.dart';
 
-Future<void> run(String cmd, List<String> args) async {
+Future<void> exec(String cmd, List<String> args) async {
   final result = await Process.run(
     cmd,
     args,
@@ -15,17 +16,17 @@ Future<void> run(String cmd, List<String> args) async {
   }
 }
 
-Future<void> main() async {
+Future<void> run(HookContext context) async {
   print('==> Installing dependencies...');
 
-  await run('flutter', ['pub', 'add', 'flutter_bloc']);
-  await run('flutter', ['pub', 'add', 'equatable']);
-  await run('flutter', ['pub', 'add', 'dio']);
-  await run('flutter', ['pub', 'add', 'connectivity_plus']);
-  await run('flutter', ['pub', 'add', 'flutter_modular']);
+  await exec('flutter', ['pub', 'add', 'flutter_bloc']);
+  await exec('flutter', ['pub', 'add', 'equatable']);
+  await exec('flutter', ['pub', 'add', 'dio']);
+  await exec('flutter', ['pub', 'add', 'connectivity_plus']);
+  await exec('flutter', ['pub', 'add', 'flutter_modular']);
 
   print('==> Installing dev dependencies...');
-  await run('flutter', ['pub', 'add', '--dev', 'flutter_lints']);
+  await exec('flutter', ['pub', 'add', '--dev', 'flutter_lints']);
 
   print('==> Done.');
 }
