@@ -1,9 +1,12 @@
 name: app_template
 description: Template Flutter com FVM + flavors
-version: 0.1.1
+version: 0.1.2
 repository: https://github.com/danieldcastro/flutter_template
 
 vars:
   app_name:
     type: string
     description: Nome do projeto
+
+environment:
+  mason: ^0.1.0
